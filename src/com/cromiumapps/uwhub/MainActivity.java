@@ -2,6 +2,7 @@ package com.cromiumapps.uwhub;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 
 public class MainActivity extends Activity {
@@ -10,6 +11,10 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_main);
+	
+	Intent iMainMenu = new Intent("com.cromiumapps.uwhub.MAINMENU");
+	startActivity(iMainMenu);
+	finish();
     }
 
     @Override

@@ -7,5 +7,12 @@
     <string name="title_activity_course">Course</string>
     <string name="title_activity_apitest_caller">APITestCaller</string>
     <string name="title_activity_omguw">OMG UW</string>
+    <string name="title_activity_events">EventsActivity</string>
+    <string name="title_activity_facultyinfo">FacultyinfoActivity</string>
+    <string name="title_activity_examinfo">ExaminfoActivity</string>
+    <string name="title_activity_foodservices">FoodservicesActivity</string>
+    <string name="title_activity_professor">ProfessorActivity</string>
+    <string name="title_activity_academicprograms">AcademicprogramsActivity</string>
+    <string name="title_activity_schedule">ScheduleActivity</string>
 
 </resources>

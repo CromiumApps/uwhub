@@ -45,11 +45,43 @@
         <activity
             android:name="com.cromiumapps.uwhub.OMGUW"
             android:label="@string/title_activity_omguw" >
-                        <intent-filter>
+            <intent-filter>
                 <action android:name="com.cromiumapps.uwhub.OMGUW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.cromiumapps.uwhub.EventsActivity"
+            android:label="@string/title_activity_events" >
+        </activity>
+        <activity
+            android:name="com.cromiumapps.uwhub.CourseActivity"
+            android:label="@string/title_activity_course" >
+        </activity>
+        <activity
+            android:name="com.cromiumapps.uwhub.FacultyinfoActivity"
+            android:label="@string/title_activity_facultyinfo" >
+        </activity>
+        <activity
+            android:name="com.cromiumapps.uwhub.ExaminfoActivity"
+            android:label="@string/title_activity_examinfo" >
+        </activity>
+        <activity
+            android:name="com.cromiumapps.uwhub.FoodservicesActivity"
+            android:label="@string/title_activity_foodservices" >
+        </activity>
+        <activity
+            android:name="com.cromiumapps.uwhub.ProfessorActivity"
+            android:label="@string/title_activity_professor" >
+        </activity>
+        <activity
+            android:name="com.cromiumapps.uwhub.AcademicprogramsActivity"
+            android:label="@string/title_activity_academicprograms" >
+        </activity>
+        <activity
+            android:name="com.cromiumapps.uwhub.ScheduleActivity"
+            android:label="@string/title_activity_schedule" >
         </activity>
     </application>
 

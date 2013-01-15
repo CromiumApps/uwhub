@@ -1,8 +1,3 @@
-/*
- * Created 12/11/13
- * Author: Bo Yin (bo@uwmobile.ca)
- */
-
 package com.cromiumapps.uwhub;
 
 import java.io.UnsupportedEncodingException;

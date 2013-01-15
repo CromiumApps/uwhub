@@ -7,7 +7,8 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="16" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -37,6 +38,15 @@
             android:label="@string/title_activity_apitest_caller" >
             <intent-filter>
                 <action android:name="com.cromiumapps.uwhub.APITESTCALLER" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.cromiumapps.uwhub.OMGUW"
+            android:label="@string/title_activity_omguw" >
+                        <intent-filter>
+                <action android:name="com.cromiumapps.uwhub.OMGUW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

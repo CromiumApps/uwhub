@@ -10,9 +10,9 @@ import android.widget.ListView;
 public class MainMenu extends ListActivity {
     
     	//What to show
-	String pages[] = {"API Test Caller", "Example 2"};
+	String pages[] = {"API Test Caller", "OMG UW"};
 	//Copy name in manifest. Case sensitive.
-	String values[] = {"APITestCaller", "Example2"};
+	String values[] = {"APITestCaller", "OMGUW"};
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

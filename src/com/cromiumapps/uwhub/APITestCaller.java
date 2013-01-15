@@ -2,8 +2,8 @@ package com.cromiumapps.uwhub;
 
 import org.json.JSONObject;
 
-import uwapi.UWAPIWrapper;
-import uwapi.UWAPIWrapper.UWAPIWrapperListener;
+import com.cromiumapps.uwhub.UWAPIWrapper;
+import com.cromiumapps.uwhub.UWAPIWrapper.UWAPIWrapperListener;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -24,15 +24,15 @@ public class APITestCaller extends Activity implements UWAPIWrapperListener {
     // Adrian's API. But this is to be used to avoid conflicts.
     private static final String API_KEY = "1d425dd8265304177d7731007388191f";
 
+    // UWAPIWrapper
+    private UWAPIWrapper apiWrapper;
+    
     // UI elements
     private EditText etService;
     private EditText etParameter;
     private ToggleButton tbParameter;
     private Button bServiceCall;
     private TextView tvService;
-
-    // UWAPIWrapper
-    private UWAPIWrapper apiWrapper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

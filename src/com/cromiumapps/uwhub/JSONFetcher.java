@@ -37,7 +37,7 @@ public class JSONFetcher extends AsyncTask<String, Boolean, JSONObject> {
 	}
 
 	private String requestJsonData(String requestUrl)
-			throws ClientProtocolException, IOException {
+		throws ClientProtocolException, IOException {
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpResponse response = httpclient.execute(new HttpGet(requestUrl));
 		StatusLine statusLine = response.getStatusLine();

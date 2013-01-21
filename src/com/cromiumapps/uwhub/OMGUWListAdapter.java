@@ -53,7 +53,6 @@ public class OMGUWListAdapter extends BaseAdapter {
 	if (convertView != null) {
 		v = convertView;
 	} else {
-		v = inflater.inflate(R.layout.layout_omguw, parent, false);
 	}
 
 	OMGUWData omguws = (OMGUWData) getItem(position);

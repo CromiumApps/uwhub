@@ -60,23 +60,21 @@ public class OMGUW extends Activity implements UWAPIWrapperListener {
 
     @Override
     public void onUWAPIRequestComplete(JSONObject jsonObject, boolean success) {
-	try {
-		JSONObject jsonResponse = jsonObject.getJSONObject("response");
-		JSONObject jsonData = jsonResponse.getJSONObject("data");
-		JSONObject jsonOMG = jsonData.getJSONObject("OMG");
-		JSONArray jsonResult = jsonOMG.getJSONArray("result");
-		
-		for (int i = 0; i < jsonResult.length(); i++) {
-			JSONObject omguwObject = jsonResult.getJSONObject(i);
-			omguws.add(new OMGUWData(omguwObject.getString("ID"), omguwObject.getString("Date"), omguwObject.getString("Content"), omguwObject.getString("Link"), omguwObject.getString("Type")));
+		try {
+			JSONObject jsonResponse = jsonObject.getJSONObject("response");
+			JSONObject jsonData = jsonResponse.getJSONObject("data");
+			JSONObject jsonOMG = jsonData.getJSONObject("OMG");
+			JSONArray jsonResult = jsonOMG.getJSONArray("result");
+			
+			for (int i = 0; i < jsonResult.length(); i++) {
+				JSONObject omguwObject = jsonResult.getJSONObject(i);
+				omguws.add(new OMGUWData(omguwObject.getString("ID"), omguwObject.getString("Date"), omguwObject.getString("Content"), omguwObject.getString("Link"), omguwObject.getString("Type")));
+			}
+			
+			OMGUWListadapter.setData(omguws);
+			OMGUWListadapter.notifyDataSetChanged();
+		} catch (JSONException e) {
+			Log.v(LOG_TAG, e.getMessage());
 		}
-		
-		OMGUWListadapter.setData(omguws);
-		OMGUWListadapter.notifyDataSetChanged();
-	} catch (JSONException e) {
-		Log.v(LOG_TAG, e.getMessage());
-	}
-	
     }
-
 }

@@ -18,7 +18,7 @@ public class OMGUW extends Activity implements UWAPIWrapperListener {
 
     // API Key
     // Adrian's API. But this is to be used to avoid conflicts.
-    private final String API_KEY = ((UWHUB) this.getApplication()).getAPI_KEY();
+    private String API_KEY;
     
     // UWAPIWrapper
     private UWAPIWrapper apiWrapper;
@@ -45,6 +45,7 @@ public class OMGUW extends Activity implements UWAPIWrapperListener {
 	
 	// Initialize an API wrapper object using the API key and this activity
 	// as the listener.
+	API_KEY = ((UWHUB) this.getApplication()).getAPI_KEY();
 	apiWrapper = new UWAPIWrapper(API_KEY, this);
 	
 	//Call Service

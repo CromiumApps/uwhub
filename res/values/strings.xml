@@ -4,15 +4,13 @@
     <string name="app_name">UW Hub</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
-    <string name="title_activity_course">Course</string>
-    <string name="title_activity_apitest_caller">APITestCaller</string>
+    <string name="title_activity_coursesinfo">Courses Information</string>
+    <string name="title_activity_apitest_caller">API Test Caller</string>
     <string name="title_activity_omguw">OMG UW</string>
-    <string name="title_activity_events">EventsActivity</string>
-    <string name="title_activity_facultyinfo">FacultyinfoActivity</string>
-    <string name="title_activity_examinfo">ExaminfoActivity</string>
-    <string name="title_activity_foodservices">FoodservicesActivity</string>
-    <string name="title_activity_professor">ProfessorActivity</string>
-    <string name="title_activity_academicprograms">AcademicprogramsActivity</string>
-    <string name="title_activity_schedule">ScheduleActivity</string>
+    <string name="title_activity_events">Events</string>
+    <string name="title_activity_examinfo">Examination Information</string>
+    <string name="title_activity_foodservices">Food Services</string>
+    <string name="title_activity_staffinfo">Staff Information</string>
+    <string name="title_activity_weather">Weather</string>
 
 </resources>

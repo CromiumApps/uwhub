@@ -22,7 +22,7 @@ public class APITestCaller extends Activity implements UWAPIWrapperListener {
     
     // API Key
     // Adrian's API. But this is to be used to avoid conflicts.
-    private static final String API_KEY = "1d425dd8265304177d7731007388191f";
+    private String API_KEY;
 
     // UWAPIWrapper
     private UWAPIWrapper apiWrapper;
@@ -48,6 +48,7 @@ public class APITestCaller extends Activity implements UWAPIWrapperListener {
 
 	// Initialize an API wrapper object using the API key and this activity
 	// as the listener.
+	API_KEY = ((UWHUB) this.getApplication()).getAPI_KEY();
 	apiWrapper = new UWAPIWrapper(API_KEY, this);
 
     }

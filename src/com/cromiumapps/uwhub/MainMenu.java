@@ -27,9 +27,9 @@ public class MainMenu extends ListActivity {
 		super.onListItemClick(l, v, position, id);
 		
 		try{
-		Class linkClass = Class.forName("com.cromiumapps.uwhub." + choice);
-		Intent ourIntent = new Intent(MainMenu.this, linkClass);
-		startActivity(ourIntent);
+			Class linkClass = Class.forName("com.cromiumapps.uwhub." + choice);
+			Intent ourIntent = new Intent(MainMenu.this, linkClass);
+			startActivity(ourIntent);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}

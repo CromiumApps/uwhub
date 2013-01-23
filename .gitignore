@@ -1,0 +1,25 @@
+# Built application files #
+*.apk
+*.ap_
+
+# Files for the dex VM #
+*.dex
+
+# Generated files #
+bin/
+gen/
+
+# Local config files #
+local.properties
+
+# Eclipse files #
+.settings
+.classpath
+.project
+proguard/
+
+# Intellij project files #
+*.iml
+*.ipr
+*.iws
+.idea/

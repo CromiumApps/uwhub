@@ -24,8 +24,6 @@ gen/
 # Eclipse stuff #
 proguard-project.txt
 *.launch
-.cproject
-.buildpath
 local.properties
 .cproject
 .buildpath
@@ -33,3 +31,6 @@ local.properties
 .metadata
 .settings/
 .metadata
+.classpath
+.loadpath
+

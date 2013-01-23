@@ -12,12 +12,6 @@ gen/
 # Local config files #
 local.properties
 
-# Eclipse files #
-.settings
-.classpath
-.project
-proguard/
-
 # Intellij project files #
 *.iml
 *.ipr

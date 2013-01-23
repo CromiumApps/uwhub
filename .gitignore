@@ -17,3 +17,6 @@ local.properties
 *.ipr
 *.iws
 .idea/
+
+# Misc other #
+proguard-project.txt

@@ -9,14 +9,27 @@
 bin/
 gen/
 
-# Local config files #
-local.properties
-
 # Intellij project files #
 *.iml
 *.ipr
 *.iws
 .idea/
 
-# Misc other #
+# Temp files #
+*.tmp
+*.bak
+*.swp
+*~.nib
+
+# Eclipse stuff #
 proguard-project.txt
+*.launch
+.cproject
+.buildpath
+local.properties
+.cproject
+.buildpath
+.project
+.metadata
+.settings/
+.metadata

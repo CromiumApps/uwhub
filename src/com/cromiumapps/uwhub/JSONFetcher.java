@@ -17,6 +17,9 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -27,13 +30,17 @@ public class JSONFetcher extends AsyncTask<String, Boolean, JSONObject> {
 	public interface JSONFetcherOnCompleteListener {
 		public void onJsonFetcherComplete(JSONObject object, boolean success);
 	}
-
+	
+	ProgressDialog progDailog;
+	private Context mContext;
+	
 	private static final String TAG = "UWAPIWrapper/JsonFetcher";// debug/log tag
 
 	private JSONFetcherOnCompleteListener listener_;
 
-	public JSONFetcher(JSONFetcherOnCompleteListener listener) {
+	public JSONFetcher(JSONFetcherOnCompleteListener listener, Context ctx) {
 		listener_ = listener;
+		mContext = ctx;
 	}
 
 	private String requestJsonData(String requestUrl)
@@ -55,6 +62,17 @@ public class JSONFetcher extends AsyncTask<String, Boolean, JSONObject> {
 		return jsonString;
 	}
 
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progDailog = new ProgressDialog(mContext);
+            progDailog.setMessage("Loading...");
+            progDailog.setIndeterminate(false);
+            progDailog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progDailog.setCancelable(true);
+            progDailog.show();
+        }
+	
 	@Override
 	protected JSONObject doInBackground(String... params) {
 		try {
@@ -71,12 +89,14 @@ public class JSONFetcher extends AsyncTask<String, Boolean, JSONObject> {
 			return null;
 		}
 	}
-
+	
 	@Override
 	protected void onPostExecute(JSONObject result) {
 		if (result == null) {
+		    	progDailog.dismiss();
 			listener_.onJsonFetcherComplete(null, false);
 		} else {
+		    	progDailog.dismiss();
 			listener_.onJsonFetcherComplete(result, true);
 		}
 	}

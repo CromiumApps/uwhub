@@ -49,7 +49,7 @@ public class APITestCaller extends Activity implements UWAPIWrapperListener {
 	// Initialize an API wrapper object using the API key and this activity
 	// as the listener.
 	API_KEY = ((UWHUB) this.getApplication()).getAPI_KEY();
-	apiWrapper = new UWAPIWrapper(API_KEY, this);
+	apiWrapper = new UWAPIWrapper(API_KEY, this, ctx);
 
     }
 
@@ -61,9 +61,9 @@ public class APITestCaller extends Activity implements UWAPIWrapperListener {
 	
 	// Call the Service with/without using parameters.
 	if (tbParameter.isChecked() && !(etParameter.getText().toString().matches(""))) {
-	    apiWrapper.callService(etService.getText().toString(), etParameter.getText().toString());
+	    apiWrapper.callService(etService.getText().toString(), etParameter.getText().toString(), ctx);
 	} else if (!(etService.getText().toString().matches(""))) {
-	    apiWrapper.callService(etService.getText().toString());
+	    apiWrapper.callService(etService.getText().toString(), ctx);
 	} else {
 	    tvService.setText("Please enter a Service");
 	}

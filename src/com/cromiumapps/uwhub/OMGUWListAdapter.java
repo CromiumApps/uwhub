@@ -47,12 +47,17 @@ public class OMGUWListAdapter extends BaseAdapter {
 	this.omguws = omguws;
     }
     
+    public OMGUWData getData(int position) {
+	return this.omguws.get(position);
+    }
+    
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 	View v = null;
 	if (convertView != null) {
 		v = convertView;
 	} else {
+	    v = inflater.inflate(R.layout.layout_omguw, parent, false);
 	}
 
 	OMGUWData omguws = (OMGUWData) getItem(position);

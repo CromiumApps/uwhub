@@ -1,5 +1,9 @@
 package com.cromiumapps.uwhub;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import android.content.Context;
 
 public class OMGUWData {
@@ -12,6 +16,7 @@ public class OMGUWData {
 	String content = null;
 	String link = null;
 	String type = null;
+	SimpleDateFormat format = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z");
 	
 	public OMGUWData (String inputID, String inputDate, String inputContent, String inputLink, String inputType) {
 	    id = inputID;
@@ -26,11 +31,24 @@ public class OMGUWData {
 	}
 	
 	public String getDate() {
+	    
+	    try 
+	    {
+	        Date parsedDate = (Date) format.parse(date);
+	        System.out.println(parsedDate);
+	        SimpleDateFormat day = new SimpleDateFormat("EEEE, MMMMM dd, yyyy");
+	        date = day.format(parsedDate).toString();
+	    } 
+	    catch (ParseException e) 
+	    {
+	        e.printStackTrace();
+	    }
+	    
 		return date;
 	}
 	
 	public String getContent() {
-		return content;
+		return decode(content);
 	}
 	
 	public String getLink() {
@@ -39,6 +57,16 @@ public class OMGUWData {
 	
 	public String getType() {
 		return type;
+	}
+	
+	private String decode(String string) {
+	    
+	    string = string.replace("&quot;", "\"");
+	    string = string.replace("&apos;", "'");
+	    string = string.replace("&amp;", "&");
+	    string = string.replace("&lt;", "<");
+	    string = string.replace("&gt;", ">");
+	    return string;
 	}
 
 }

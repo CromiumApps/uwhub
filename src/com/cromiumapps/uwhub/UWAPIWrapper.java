@@ -5,12 +5,13 @@ import java.net.URLEncoder;
 
 import org.json.JSONObject;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.cromiumapps.uwhub.JSONFetcher.JSONFetcherOnCompleteListener;
 
 /*
- * Wrapper class for the University of Waterloo Open Data API.
+ * Wrapper class for the University of Waterloo Open Data API. Modified by Adrian Gaw.
  */
 public class UWAPIWrapper implements JSONFetcherOnCompleteListener {
 	/*
@@ -25,12 +26,13 @@ public class UWAPIWrapper implements JSONFetcherOnCompleteListener {
 	private static final String URL_FORMAT_WITH_QUERY = "http://api.uwaterloo.ca/public/v1/?key=%s&service=%s&q=%s&output=json";
 
 	private String apiKey_;
-
+	private Context context_;
 	private UWAPIWrapperListener listener_;
 
-	public UWAPIWrapper(String apiKey, UWAPIWrapperListener listener) {
+	public UWAPIWrapper(String apiKey, UWAPIWrapperListener listener, Context ctx) {
 		apiKey_ = apiKey;
 		listener_ = listener;
+		context_ = ctx;
 	}
 
 	/*
@@ -39,12 +41,12 @@ public class UWAPIWrapper implements JSONFetcherOnCompleteListener {
 	 * The listener's onUWAPIRequestComplete method will be called once
 	 * the request is complete.
 	 */
-	public void callService(String service) {
+	public void callService(String service, Context ctx) {
 		try {
 			String queryString = String.format(URL_FORMAT,
 					URLEncoder.encode(apiKey_, "utf-8"),
 					URLEncoder.encode(service, "utf-8"));
-			callWithUrl(queryString);
+			callWithUrl(queryString, ctx);
 		} catch (UnsupportedEncodingException e) {
 			Log.d(TAG, e.toString());
 		}
@@ -56,20 +58,20 @@ public class UWAPIWrapper implements JSONFetcherOnCompleteListener {
  	 * The listener's onUWAPIRequestComplete method will be called once
 	 * the request is complete.
 	 */
-	public void callService(String service, String parameter) {
+	public void callService(String service, String parameter, Context ctx) {
 		try {
 			String queryString = String.format(URL_FORMAT_WITH_QUERY,
 					URLEncoder.encode(apiKey_, "utf-8"),
 					URLEncoder.encode(service, "utf-8"),
 					URLEncoder.encode(parameter, "utf-8"));
-			callWithUrl(queryString);
+			callWithUrl(queryString, ctx);
 		} catch (UnsupportedEncodingException e) {
 			Log.d(TAG, e.toString());
 		}
 	}
 
-	private void callWithUrl(String url) {
-		JSONFetcher fetcher = new JSONFetcher(this);
+	private void callWithUrl(String url, Context ctx) {
+		JSONFetcher fetcher = new JSONFetcher(this, ctx);
 		fetcher.execute(url);
 	}
 

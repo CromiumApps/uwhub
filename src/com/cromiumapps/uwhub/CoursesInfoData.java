@@ -34,19 +34,11 @@ public class CoursesInfoData {
 	}
 	
 	public String getDescription() {
-		return description;
+		return removeOfferings(description);
 	}
 	
-	// May need this
-	/*
-	private String decode(String string) {
-	    
-	    string = string.replace("&quot;", "\"");
-	    string = string.replace("&apos;", "'");
-	    string = string.replace("&amp;", "&");
-	    string = string.replace("&lt;", "<");
-	    string = string.replace("&gt;", ">");
+	private String removeOfferings(String string) {
+	    string = string.replaceAll("\\[Offered: [FWS]\\]", "");
 	    return string;
 	}
-	*/
 }

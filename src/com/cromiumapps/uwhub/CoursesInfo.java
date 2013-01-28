@@ -15,6 +15,9 @@ import android.widget.ListView;
 
 import com.cromiumapps.uwhub.UWAPIWrapper.UWAPIWrapperListener;
 
+// For testing
+import android.widget.Toast;
+
 public class CoursesInfo extends FragmentActivity implements UWAPIWrapperListener {
 
 	// API Key
@@ -36,7 +39,6 @@ public class CoursesInfo extends FragmentActivity implements UWAPIWrapperListene
 	// Data and List Adapter
 	//static ArrayList<CoursesInfoListAdapter> CoursesInfoListadapters = new ArrayList<CoursesInfoListAdapter>();
 	//ArrayList<ArrayList<CoursesInfoData>> coursesList = new ArrayList<ArrayList<CoursesInfoData>>();
-	//ArrayList<CoursesInfoData> courses;
 
 	CoursesInfoListAdapter CoursesInfoListadapter;
 	ArrayList<CoursesInfoData> courses = new ArrayList<CoursesInfoData>();
@@ -66,7 +68,7 @@ public class CoursesInfo extends FragmentActivity implements UWAPIWrapperListene
 		} else {
 			// Call Service
 			// Need to get full list...
-			apiWrapper.callService("CourseInfo", "CS 137", ctx);		
+			apiWrapper.callService("CourseSearch", "CS", ctx);	
 		}
 	}
 
@@ -84,42 +86,25 @@ public class CoursesInfo extends FragmentActivity implements UWAPIWrapperListene
 	}
 
 	@Override
-	public void onUWAPIRequestComplete(JSONObject jsonObject, boolean success) {
-	
-		//final String CourseList = "Course List";
-	
+	public void onUWAPIRequestComplete(JSONObject jsonObject, boolean success) {	
 		try {
 			JSONObject jsonResponse = jsonObject.getJSONObject("response");
 			JSONObject jsonData = jsonResponse.getJSONObject("data");
-			//JSONObject jsonCoursesInfo = null;
-			/*
-			for (int i = 0; i < jsonData.length(); i++) {
-				switch(i) {
-					case 0: jsonCoursesInfo = jsonData.getJSONObject(CourseList);
-					break;
-				}
+			JSONArray jsonCoursesInfoResult = jsonData.getJSONArray("result");
 			
-			Log.i(LOG_TAG, Integer.toString(i)); */
-			//JSONArray jsonCoursesInfoResult = jsonCoursesInfo.getJSONArray("result");
-			JSONObject jsonCoursesInfoResult = jsonData.getJSONObject("result");
-			
-			//courses = new ArrayList<CoursesInfoData>();
 			for (int j = 0; j < jsonCoursesInfoResult.length(); j++) {
-				//JSONObject coursesObject = jsonCoursesInfoResult.getJSONObject(j);
-				//courses.add(j, new CoursesInfoData(coursesObject.getString("DeptAcronym"), coursesObject.getString("Number"), coursesObject.getString("Title"), coursesObject.getString("Description")));
-				courses.add(j, new CoursesInfoData(jsonCoursesInfoResult.getString("DeptAcronym"), jsonCoursesInfoResult.getString("Number"), jsonCoursesInfoResult.getString("Title"), jsonCoursesInfoResult.getString("Description")));
-
+				JSONObject coursesObject = jsonCoursesInfoResult.getJSONObject(j);
+				courses.add(j, new CoursesInfoData(coursesObject.getString("DeptAcronym"), coursesObject.getString("Number"), coursesObject.getString("Title"), coursesObject.getString("Description")));
 			}
-			//coursesList.add(i, courses);
-			
-			
 			CoursesInfoListadapter.notifyDataSetChanged();
-		//}
 		/*
 		viewPager.setAdapter(sectionsPagerAdapter);
 		*/
 		} catch (JSONException e) {
 			Log.v(LOG_TAG, e.getMessage());
+
+			// For testing
+			Toast.makeText(this, "Throws exception", Toast.LENGTH_SHORT).show();
 		}
 	}
     

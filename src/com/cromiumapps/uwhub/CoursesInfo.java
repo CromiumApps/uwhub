@@ -91,28 +91,23 @@ public class CoursesInfo extends FragmentActivity implements UWAPIWrapperListene
 		try {
 			JSONObject jsonResponse = jsonObject.getJSONObject("response");
 			JSONObject jsonData = jsonResponse.getJSONObject("data");
-			JSONObject jsonCoursesInfo = null;
 
 			for (int i = 0; i < jsonData.length(); i++) {
-				switch(i) {
-					case 0: jsonCoursesInfo = jsonData.getJSONObject(CourseList);
-					break;
-				}
 
-			Log.i(LOG_TAG, Integer.toString(i));
-			JSONArray jsonCoursesInfoResult = jsonCoursesInfo.getJSONArray("result");
+				Log.i(LOG_TAG, Integer.toString(i));
+				JSONArray jsonCoursesInfoResult = jsonData.getJSONArray("result");
 			
-			courses = new ArrayList<CoursesInfoData>();
-			for (int j = 0; j < jsonCoursesInfoResult.length(); j++) {
-				JSONObject coursesObject = jsonCoursesInfoResult.getJSONObject(j);
-				courses.add(j, new CoursesInfoData(coursesObject.getString("DeptAcronym"), coursesObject.getString("Number"), coursesObject.getString("Title"), coursesObject.getString("Description")));
+				courses = new ArrayList<CoursesInfoData>();
+				for (int j = 0; j < jsonCoursesInfoResult.length(); j++) {
+					JSONObject coursesObject = jsonCoursesInfoResult.getJSONObject(j);
+					courses.add(j, new CoursesInfoData(coursesObject.getString("DeptAcronym"), coursesObject.getString("Number"), coursesObject.getString("Title"), coursesObject.getString("Description")));
+				}
+				coursesList.add(i, courses);
+			
+				CoursesInfoListadapters.add(i, new CoursesInfoListAdapter(ctx, coursesList.get(i)));
 			}
-			coursesList.add(i, courses);
-			
-			CoursesInfoListadapters.add(i, new CoursesInfoListAdapter(ctx, coursesList.get(i)));
-		}
 		
-		viewPager.setAdapter(sectionsPagerAdapter);
+			viewPager.setAdapter(sectionsPagerAdapter);
 		
 		} catch (JSONException e) {
 			Log.v(LOG_TAG, e.getMessage());

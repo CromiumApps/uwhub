@@ -8,17 +8,9 @@ import org.json.JSONObject;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.cromiumapps.uwhub.UWAPIWrapper.UWAPIWrapperListener;
@@ -36,14 +28,18 @@ public class CoursesInfo extends FragmentActivity implements UWAPIWrapperListene
 	Context ctx = this;
 	
 	// UI Elements
-	static ArrayList<ListView> lvContent = new ArrayList<ListView>();
-	SectionsPagerAdapter sectionsPagerAdapter;
-	ViewPager viewPager;
+	//static ArrayList<ListView> lvContent = new ArrayList<ListView>();
+	//SectionsPagerAdapter sectionsPagerAdapter;
+	//ViewPager viewPager;
+	ListView lvCourseInfoContent;
 	
 	// Data and List Adapter
-	static ArrayList<CoursesInfoListAdapter> CoursesInfoListadapters = new ArrayList<CoursesInfoListAdapter>();
-	ArrayList<ArrayList<CoursesInfoData>> coursesList = new ArrayList<ArrayList<CoursesInfoData>>();
-	ArrayList<CoursesInfoData> courses;
+	//static ArrayList<CoursesInfoListAdapter> CoursesInfoListadapters = new ArrayList<CoursesInfoListAdapter>();
+	//ArrayList<ArrayList<CoursesInfoData>> coursesList = new ArrayList<ArrayList<CoursesInfoData>>();
+	//ArrayList<CoursesInfoData> courses;
+
+	CoursesInfoListAdapter CoursesInfoListadapter;
+	ArrayList<CoursesInfoData> courses = new ArrayList<CoursesInfoData>();
 	
 	// Others
 	private final String LOG_TAG = "CoursesInfo";
@@ -58,15 +54,19 @@ public class CoursesInfo extends FragmentActivity implements UWAPIWrapperListene
 		API_KEY = ((UWHUB) this.getApplication()).getAPI_KEY();
 		apiWrapper = new UWAPIWrapper(API_KEY, this, ctx);
 
-		sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-		viewPager = (ViewPager) findViewById(R.id.pCoursesInfo);
-	
+		//sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+		//viewPager = (ViewPager) findViewById(R.id.pCoursesInfo);
+		ListView lvCourseInfoContent = (ListView) findViewById(R.id.lvCourseInfoContent);
+		
+		CoursesInfoListadapter = new CoursesInfoListAdapter(ctx, courses);
+		lvCourseInfoContent.setAdapter(CoursesInfoListadapter);
+		
 		if(savedInstanceState != null){
-			viewPager.setAdapter(sectionsPagerAdapter);
+			//viewPager.setAdapter(sectionsPagerAdapter);
 		} else {
 			// Call Service
 			// Need to get full list...
-			apiWrapper.callService("CoursesInfo", "CS 137", ctx);		
+			apiWrapper.callService("CourseInfo", "CS 137", ctx);		
 		}
 	}
 
@@ -86,34 +86,38 @@ public class CoursesInfo extends FragmentActivity implements UWAPIWrapperListene
 	@Override
 	public void onUWAPIRequestComplete(JSONObject jsonObject, boolean success) {
 	
-		final String CourseList = "Course List";
+		//final String CourseList = "Course List";
 	
 		try {
 			JSONObject jsonResponse = jsonObject.getJSONObject("response");
 			JSONObject jsonData = jsonResponse.getJSONObject("data");
-			JSONObject jsonCoursesInfo = null;
-
+			//JSONObject jsonCoursesInfo = null;
+			/*
 			for (int i = 0; i < jsonData.length(); i++) {
 				switch(i) {
 					case 0: jsonCoursesInfo = jsonData.getJSONObject(CourseList);
 					break;
 				}
-
-			Log.i(LOG_TAG, Integer.toString(i));
-			JSONArray jsonCoursesInfoResult = jsonCoursesInfo.getJSONArray("result");
 			
-			courses = new ArrayList<CoursesInfoData>();
+			Log.i(LOG_TAG, Integer.toString(i)); */
+			//JSONArray jsonCoursesInfoResult = jsonCoursesInfo.getJSONArray("result");
+			JSONObject jsonCoursesInfoResult = jsonData.getJSONObject("result");
+			
+			//courses = new ArrayList<CoursesInfoData>();
 			for (int j = 0; j < jsonCoursesInfoResult.length(); j++) {
-				JSONObject coursesObject = jsonCoursesInfoResult.getJSONObject(j);
-				courses.add(j, new CoursesInfoData(coursesObject.getString("DeptAcronym"), coursesObject.getString("Number"), coursesObject.getString("Title"), coursesObject.getString("Description")));
+				//JSONObject coursesObject = jsonCoursesInfoResult.getJSONObject(j);
+				//courses.add(j, new CoursesInfoData(coursesObject.getString("DeptAcronym"), coursesObject.getString("Number"), coursesObject.getString("Title"), coursesObject.getString("Description")));
+				courses.add(j, new CoursesInfoData(jsonCoursesInfoResult.getString("DeptAcronym"), jsonCoursesInfoResult.getString("Number"), jsonCoursesInfoResult.getString("Title"), jsonCoursesInfoResult.getString("Description")));
+
 			}
-			coursesList.add(i, courses);
+			//coursesList.add(i, courses);
 			
-			CoursesInfoListadapters.add(i, new CoursesInfoListAdapter(ctx, coursesList.get(i)));
-		}
-		
+			
+			CoursesInfoListadapter.notifyDataSetChanged();
+		//}
+		/*
 		viewPager.setAdapter(sectionsPagerAdapter);
-		
+		*/
 		} catch (JSONException e) {
 			Log.v(LOG_TAG, e.getMessage());
 		}
@@ -123,6 +127,7 @@ public class CoursesInfo extends FragmentActivity implements UWAPIWrapperListene
 	* A {@link FragmentPagerAdapter} that returns a fragment corresponding to
 	* one of the sections/tabs/pages.
 	*/
+	/*
     public static class SectionsPagerAdapter extends FragmentPagerAdapter {
 
 		public SectionsPagerAdapter(FragmentManager fm) {
@@ -148,16 +153,19 @@ public class CoursesInfo extends FragmentActivity implements UWAPIWrapperListene
 			// return CoursesInfoListadapters.get(position).getData(position).getType();
 		}
 	}
-
+*/
 	/**
 	* A dummy fragment representing a section of the app, but that simply
 	* displays dummy text.
 	*/
+	/*
     public static class SectionFragment extends Fragment {
+    */
 		/**
 		 * The fragment argument representing the section number for this
 		 * fragment.
 		 */
+	/*
 		public static final String ARG_SECTION_NUMBER = "section_number";
 		public final int sectionID;
 
@@ -183,5 +191,7 @@ public class CoursesInfo extends FragmentActivity implements UWAPIWrapperListene
 		    setRetainInstance(true);
 		    return lvContent.get(sectionID);
 		}
+		
     }
+    */
 }

@@ -33,4 +33,5 @@ local.properties
 .metadata
 .classpath
 .loadpath
-
+lint.xml
+build.xml

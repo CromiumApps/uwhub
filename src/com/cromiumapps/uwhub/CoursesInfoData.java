@@ -34,11 +34,16 @@ public class CoursesInfoData {
 	}
 	
 	public String getDescription() {
-		return removeOfferings(description);
+		return parse(description);
 	}
 	
-	private String removeOfferings(String string) {
+	private String parse(String string) {
+		// Remove course offering dates
 	    string = string.replaceAll("\\[Offered.*\\]", "");
+	    string = string.replaceAll("\\[Also offered.*\\]", "");
+
+	    // Parse literals
+	    string = string.replaceAll("\\&eacute\\;", "é");
 	    return string;
 	}
 }

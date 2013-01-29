@@ -38,7 +38,7 @@ public class CoursesInfoData {
 	}
 	
 	private String removeOfferings(String string) {
-	    string = string.replaceAll("\\[Offered: [FWS]\\]", "");
+	    string = string.replaceAll("\\[Offered.*\\]", "");
 	    return string;
 	}
 }

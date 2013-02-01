@@ -24,6 +24,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 
 public class Events extends FragmentActivity implements UWAPIWrapperListener {
@@ -37,20 +38,12 @@ public class Events extends FragmentActivity implements UWAPIWrapperListener {
     // UWAPIWrapper
     private static UWAPIWrapper apiWrapper;
     
-    //Context
-    Context ctx = this;
-    
-  //UI Elements
-    static ArrayList<ListView> lvContent = new ArrayList<ListView>();
-    SectionsPagerAdapter sectionsPagerAdapter;
-    ViewPager viewPager;
+    ListView lvEventsContent;
     
     // Data and List Adapter
-    static ArrayList<EventsListAdapter> EventsListadapters = new ArrayList<EventsListAdapter>();
-    ArrayList<ArrayList<EventsData>> EventsList = new ArrayList<ArrayList<EventsData>>();
-    ArrayList<EventsData> Events;
-    
- // Others
+    EventsListAdapter EventsListadapter;
+    ArrayList<EventsData> Events = new ArrayList<EventsData>();
+    // Others
     private final String LOG_TAG = "Events";
     
     //--------------------------------------------------
@@ -64,18 +57,26 @@ public class Events extends FragmentActivity implements UWAPIWrapperListener {
 		// Initialize an API wrapper object using the API key and this activity
 		// as the listener.
 		API_KEY = ((UWHUB) this.getApplication()).getAPI_KEY();
-		apiWrapper = new UWAPIWrapper(API_KEY, this, ctx);
-
-		sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-		viewPager = (ViewPager) findViewById(R.id.pOMGUW);
+		apiWrapper = new UWAPIWrapper(API_KEY, this, this);
+		
+		ListView lvEventsContent = (ListView) findViewById(R.id.lvEventsContent);
+		
+		EventsListadapter = new EventsListAdapter(this, Events);
+		lvEventsContent.setAdapter(EventsListadapter);
 		
 		if(savedInstanceState != null){
-		    viewPager.setAdapter(sectionsPagerAdapter);
+			lvEventsContent.setAdapter(EventsListadapter);
 		} else {
 		    // Call Service
-		    apiWrapper.callService("Events", ctx);	    
+		    apiWrapper.callService("Events", this);	    
 		}
 		
+	}
+	
+	@Override
+	protected void onSaveInstanceState(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onSaveInstanceState(savedInstanceState);
 	}
 	
 	@Override
@@ -85,127 +86,25 @@ public class Events extends FragmentActivity implements UWAPIWrapperListener {
 		return true;
 	}
 	
-	//copied from OMGUW-------------------------------------
 	@Override
     public void onUWAPIRequestComplete(JSONObject jsonObject, boolean success) {
-	
-	final String EVENTS = "Events";
-	final String ILU = "ILUs";
-	final String MCs = "MCs";
-	final String OVERHEARDs = "OVERHEARDs";
-	final String ASK = "ASK";
 	
 	try {
 	    JSONObject jsonResponse = jsonObject.getJSONObject("response");
 	    JSONObject jsonData = jsonResponse.getJSONObject("data");
-	    JSONObject jsonEvents = null;
-	    
-	    for (int i = 0; i < jsonData.length(); i++) {
-		switch (i) {
-		    case 0: jsonEvents = jsonData.getJSONObject(EVENTS);
-		    break;
-		    
-		    case 1: jsonEvents = jsonData.getJSONObject(ILU);
-		    break; 
-		    
-		    case 2: jsonEvents = jsonData.getJSONObject(MCs);
-		    break;
-
-		    case 3: jsonEvents = jsonData.getJSONObject(OVERHEARDs);
-		    break;
-
-		    case 4: jsonEvents = jsonData.getJSONObject(ASK);
-		    break;
-		    
+	    JSONArray jsonEvents = jsonData.getJSONArray("result");
+		
+		for (int j = 0; j < jsonEvents.length(); j++) {
+		    JSONObject EventsObject = jsonEvents.getJSONObject(j);
+		    Events.add(j, new EventsData(EventsObject.getString("ID"), jsonData.getString("Date"), EventsObject.getString("Name"), EventsObject.getString("Links"), EventsObject.getString("Description")));
 		}
-		Log.i(LOG_TAG, Integer.toString(i));
-		JSONArray jsonEventsResult = jsonEvents.getJSONArray("result");
-			
-		Events = new ArrayList<EventsData>();
-		for (int j = 0; j < jsonEventsResult.length(); j++) {
-		    JSONObject EventsObject = jsonEventsResult.getJSONObject(j);
-		    Events.add(j, new EventsData(EventsObject.getString("ID"), EventsObject.getString("Date"), EventsObject.getString("Content"), EventsObject.getString("Link"), EventsObject.getString("Type")));
-		}
-		EventsList.add(i, Events);
-			
-		EventsListadapters.add(i, new EventsListAdapter(ctx, EventsList.get(i)));
-	    }
-	    
-	    viewPager.setAdapter(sectionsPagerAdapter);
-	    
+		
+		EventsListadapter.notifyDataSetChanged();
+	   
 		} catch (JSONException e) {
 			Log.v(LOG_TAG, e.getMessage());
+			// For testing
+			Toast.makeText(this, "Throws exception", Toast.LENGTH_SHORT).show();
 		}
-	
-    }
-    
-    /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
-    public static class SectionsPagerAdapter extends FragmentPagerAdapter {
-
-	public SectionsPagerAdapter(FragmentManager fm) {
-	    super(fm);
 	}
-
-	@Override
-	public Fragment getItem(int position) {
-	    
-            return new SectionFragment(position);
-        }
-
-	@Override
-	public int getCount() {
-	    // Show 5 total pages.
-	    return 5;
-	}
-
-	@Override
-	public CharSequence getPageTitle(int position) {
-	
-	    return EventsListadapters.get(position).getData(position).getType();
-	    
-	}
-    }
-
-    /**
-     * A dummy fragment representing a section of the app, but that simply
-     * displays dummy text.
-     */
-    public static class SectionFragment extends Fragment {
-	/**
-	 * The fragment argument representing the section number for this
-	 * fragment.
-	 */
-	public static final String ARG_SECTION_NUMBER = "section_number";
-	public final int sectionID;
-
-	public SectionFragment(int sectionID) {
-	    	this.sectionID = sectionID;
-	}
-
-	@Override
-	public void onSaveInstanceState(Bundle outState) {
-	    super.onSaveInstanceState(outState);
-
-	}
-	
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-		Bundle savedInstanceState) {
-
-	    if(savedInstanceState==null){
-		lvContent.add(sectionID, new ListView(getActivity()));
-	    }
-
-	    lvContent.get(sectionID).setAdapter(EventsListadapters.get(sectionID));
-	    
-	    setRetainInstance(true);
-	    return lvContent.get(sectionID);
-
-	}
-    }
-    //--------------------------------------------------------
-
 }

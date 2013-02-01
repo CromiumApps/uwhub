@@ -43,8 +43,8 @@ public class EventsListAdapter extends BaseAdapter {
 	return position;
     }
 
-    public void setData(ArrayList<OMGUWData> omguws) {
-	this.Events = Events;
+    public void setData(ArrayList<EventsData> events) {
+	this.Events = events;
     }
     
     public EventsData getData(int position) {
@@ -57,17 +57,20 @@ public class EventsListAdapter extends BaseAdapter {
 	if (convertView != null) {
 		v = convertView;
 	} else {
-	    v = inflater.inflate(R.layout.layout_omguw, parent, false);
+	    v = inflater.inflate(R.layout.layout_events, parent, false);
 	}
 
-	OMGUWData omguws = (OMGUWData) getItem(position);
-	TextView tvLAYOUTOMGUWTypeID = (TextView) v.findViewById(R.id.tvLAYOUTOMGUWTypeID);
-	TextView tvLAYOUTOMGUWDate = (TextView) v.findViewById(R.id.tvLAYOUTOMGUWDate);
-	TextView tvLAYOUTOMGUWContent = (TextView) v.findViewById(R.id.tvLAYOUTOMGUWContent);
+	EventsData event = (EventsData) getItem(position);
 	
-	tvLAYOUTOMGUWTypeID.setText(omguws.getType() + ": " + omguws.getId());
-	tvLAYOUTOMGUWDate.setText(omguws.getDate());
-	tvLAYOUTOMGUWContent.setText(omguws.getContent());
+	TextView tvLAYOUTEVENTSName = (TextView) v.findViewById(R.id.tvLAYOUTEVENTSName);
+	TextView tvLAYOUTEVENTSDate = (TextView) v.findViewById(R.id.tvLAYOUTEVENTSDate);
+	TextView tvLAYOUTEVENTSContent = (TextView) v.findViewById(R.id.tvLAYOUTEVENTSContent);
+	TextView tvLAYOUTEVENTSLinks = (TextView) v.findViewById(R.id.tvLAYOUTEVENTSLinks);
+	
+	tvLAYOUTEVENTSName.setText(event.getName());
+	tvLAYOUTEVENTSDate.setText(event.getDate());
+	tvLAYOUTEVENTSContent.setText(event.getDescription());
+	tvLAYOUTEVENTSLinks.setText(event.getLinks());
 	
 	return v;
     }

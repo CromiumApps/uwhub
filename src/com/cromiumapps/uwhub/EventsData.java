@@ -13,17 +13,18 @@ public class EventsData {
 	
 	String id = null;
 	String date = null;
-	String content = null;
-	String link = null;
-	String type = null;
+	String name = null;
+	String links = null;
+	String description = null;
+	
 	SimpleDateFormat format = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z");
 	
-	public EventsData (String inputID, String inputDate, String inputContent, String inputLink, String inputType) {
+	public EventsData (String inputID, String inputDate, String inputName, String inputLinks, String inputDescription) {
 	    id = inputID;
 	    date = inputDate;
-	    content = inputContent;
-	    link = inputLink;
-	    type = inputType;
+	    name = inputName;
+	    links = inputLinks;
+	    description = inputDescription;
 	}
 	
 	public String getId() {
@@ -47,16 +48,16 @@ public class EventsData {
 		return date;
 	}
 	
-	public String getContent() {
-		return decode(content);
+	public String getName() {
+		return name;
 	}
 	
-	public String getLink() {
-		return link;
+	public String getLinks() {
+		return decode(links);
 	}
 	
-	public String getType() {
-		return type;
+	public String getDescription() {
+		return decode(description);
 	}
 	
 	private String decode(String string) {
@@ -66,6 +67,13 @@ public class EventsData {
 	    string = string.replace("&amp;", "&");
 	    string = string.replace("&lt;", "<");
 	    string = string.replace("&gt;", ">");
+	    string = string.replace("{\"result\":\"", "");
+	    string = string.replace("\"}", "");
+	    
+	    string = string.replaceAll("\\[Offered.*\\]", "");
+	    string = string.replaceAll("\\[Also offered.*\\]", "");
+	    string = string.replaceAll("\\&eacute\\;", "é");
+	    
 	    return string;
 	}
 

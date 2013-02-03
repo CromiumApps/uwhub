@@ -69,7 +69,11 @@ public class EventsData {
 	    string = string.replace("&gt;", ">");
 	    string = string.replace("{\"result\":\"", "");
 	    string = string.replace("\"}", "");
-	    
+	    string = string.replace("\\", "");
+	    string = string.replace("&hellip;", "...");
+	    string = string.replace("&ldquo;", "\"");
+	    string = string.replace("&rdquo;", "\"");
+	    string = string.replace("&ndash;", "-");
 	    string = string.replaceAll("\\[Offered.*\\]", "");
 	    string = string.replaceAll("\\[Also offered.*\\]", "");
 	    string = string.replaceAll("\\&eacute\\;", "é");

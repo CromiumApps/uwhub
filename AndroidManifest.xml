@@ -45,6 +45,7 @@
         </activity>
         <activity
             android:name="com.cromiumapps.uwhub.Events"
+            android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_events" >
             <intent-filter>
                 <action android:name="com.cromiumapps.uwhub.EVENTS" />

@@ -65,6 +65,12 @@ public class Events extends FragmentActivity implements UWAPIWrapperListener {
 		lvEventsContent.setAdapter(EventsListadapter);
 		
 		if(savedInstanceState != null){
+			API_KEY = ((UWHUB) this.getApplication()).getAPI_KEY();
+			apiWrapper = new UWAPIWrapper(API_KEY, this, this);
+		
+			lvEventsContent = (ListView) findViewById(R.id.lvEventsContent);
+		
+			EventsListadapter = new EventsListAdapter(this, Events);
 			lvEventsContent.setAdapter(EventsListadapter);
 		} else {
 		    // Call Service

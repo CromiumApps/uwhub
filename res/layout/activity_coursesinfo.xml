@@ -1,14 +1,15 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/pCoursesInfo"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/pCoursesInfo"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical" >
 
-    <ListView
-        android:id="@+id/lvCourseInfoContent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" >
-    </ListView>
+	<ListView
+		android:id="@+id/coursesInfoContent"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content" >
+	</ListView>
 
 </LinearLayout>

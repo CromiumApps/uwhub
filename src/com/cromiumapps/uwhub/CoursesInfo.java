@@ -13,7 +13,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
-import android.widget.EditText;
 import android.widget.ListView;
 
 import com.cromiumapps.uwhub.UWAPIWrapper.UWAPIWrapperListener;
@@ -58,15 +57,13 @@ public class CoursesInfo extends Activity implements UWAPIWrapperListener {
 		API_KEY = ((UWHUB) this.getApplication()).getAPI_KEY();
 		apiWrapper = new UWAPIWrapper(API_KEY, this, ctx);
 
-		final EditText input = new EditText(this);
+		final String[] faculties = {"ACC","ACTSC","ADMGT","AFM","AHS","AMATH","ANTH","APPLS","ARBUS","ARCH","ARCHL","ARTS","ASTRN","AVIA","BET","BIOL","BUS","CEDEV","CHE","CHINA","CIVE","CLAS","CM","CMW","CO","COGSCI","COMM","COMST","CONST","COOP","CROAT","CS","CT","DAC","DEI","DM","DRAMA","DUTCH","EARTH","EASIA","ECE","ECON","ELPE","ENBUS","ENGL","ENVE","ERS","ESL","FINE","FR","GDBA","GENE","GEOE","GEOG","GER","GERON","GGOV","GLOBAL","GRK","GS","HIST","HLTH","HRM","HSG","HUMSC","INDEV","INTEG","INTST","INTTS","IS","ITAL","ITALST","JAPAN","JS","KIN","KOREA","KPE","LAT","LED","LS","MATBUS","MATH","ME","MEDVL","MNS","MSCI","MTE","MTHEL","MUSIC","NANO","NATST","NE","NES","OPTOM","PACS","PD","PDPHRM","PHARM","PHIL","PHS","PHYS","PLAN","PMATH","POLSH","PORT","PS","PSCI","PSYCH","QIC","REC","REES","RELC","RS","RUSS","SCBUS","SCI","SDS","SE","SEQ","SI","SMF","SOC","SOCIN","SOCWK","SPAN","SPCOM","STAT","STV","SWK","SWREN","SYDE","TAX","TN","TOUR","TPM","TS","UN","UNIV","VCULT","WHMIS","WKRPT","WS"};
 
 		new AlertDialog.Builder(this)
-			.setTitle("Search")
-			.setMessage("Please enter a Faculty or Course ID")
-			.setView(input)
-			.setPositiveButton("Go", new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog, int whichButton) {
-					apiWrapper.callService("CourseSearch", input.getText().toString(), ctx);
+			.setTitle("Select a Faculty")
+			.setItems(faculties, new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int item) {
+					apiWrapper.callService("CourseSearch", faculties[item], ctx);
 				}
 			}).show();
 	}

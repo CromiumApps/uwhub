@@ -49,36 +49,14 @@ public class EventsData {
 	}
 	
 	public String getName() {
-		return name;
+		return StringCleaner.replaceHTML(name);
 	}
 	
 	public String getLinks() {
-		return decode(links);
+		return StringCleaner.getLink(links);
 	}
 	
 	public String getDescription() {
-		return decode(description);
+		return StringCleaner.cleanContent(description);
 	}
-	
-	private String decode(String string) {
-	    
-	    string = string.replace("&quot;", "\"");
-	    string = string.replace("&apos;", "'");
-	    string = string.replace("&amp;", "&");
-	    string = string.replace("&lt;", "<");
-	    string = string.replace("&gt;", ">");
-	    string = string.replace("{\"result\":\"", "");
-	    string = string.replace("\"}", "");
-	    string = string.replace("\\", "");
-	    string = string.replace("&hellip;", "...");
-	    string = string.replace("&ldquo;", "\"");
-	    string = string.replace("&rdquo;", "\"");
-	    string = string.replace("&ndash;", "-");
-	    string = string.replaceAll("\\[Offered.*\\]", "");
-	    string = string.replaceAll("\\[Also offered.*\\]", "");
-	    string = string.replaceAll("\\&eacute\\;", "é");
-	    
-	    return string;
-	}
-
 }

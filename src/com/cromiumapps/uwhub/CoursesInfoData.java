@@ -15,10 +15,10 @@ public class CoursesInfoData {
 	String description = null;
 	
 	public CoursesInfoData (String inDept, String inNumber, String inTitle, String inDesc) {
-	    dept = inDept;
-	    number = inNumber;
+		dept = inDept;
+		number = inNumber;
 		title = inTitle;
-	    description = inDesc;
+		description = inDesc;
 	}
 	
 	public String getDept() {
@@ -34,16 +34,6 @@ public class CoursesInfoData {
 	}
 	
 	public String getDescription() {
-		return parse(description);
-	}
-	
-	private String parse(String string) {
-		// Remove course offering dates
-	    string = string.replaceAll("\\[Offered.*\\]", "");
-	    string = string.replaceAll("\\[Also offered.*\\]", "");
-
-	    // Parse literals
-	    string = string.replaceAll("\\&eacute\\;", "é");
-	    return string;
+		return StringCleaner.removeOfferings(description);
 	}
 }

@@ -9,9 +9,9 @@ import android.widget.ListView;
 
 public class MainMenu extends ListActivity {
     
-    	//What to show
+    // Names of pages for users
 	String pages[] = {"API Test Caller", "Events", "Courses Information", "Examination Information", "Food Services", "Staff Information", "Weather", "OMG UW"};
-	//Copy name in manifest. Case sensitive.
+	// Names of pages from manifest. Case sensitive.
 	String values[] = {"APITestCaller", "Events", "CoursesInfo", "ExamInfo", "FoodServices", "StaffInfo", "Weather", "OMGUW"};
 	
 	@Override

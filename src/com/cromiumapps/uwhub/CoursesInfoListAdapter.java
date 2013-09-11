@@ -29,17 +29,17 @@ public class CoursesInfoListAdapter extends BaseAdapter {
     }
 
     @Override
-		public int getCount() {
+	public int getCount() {
 		return courses.size();
     }
 
     @Override
-    	public Object getItem(int position) {
+    public Object getItem(int position) {
 		return courses.get(position);
     }
 
     @Override
-    	public long getItemId(int position) {
+    public long getItemId(int position) {
 		return position;
     }
 

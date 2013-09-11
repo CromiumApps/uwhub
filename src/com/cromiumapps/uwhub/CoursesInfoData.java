@@ -1,7 +1,5 @@
 package com.cromiumapps.uwhub;
 
-import java.text.ParseException;
-
 import android.content.Context;
 
 public class CoursesInfoData {

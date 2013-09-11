@@ -95,9 +95,6 @@ public class CoursesInfo extends Activity implements UWAPIWrapperListener {
 			coursesInfoListadapter.notifyDataSetChanged();
 		} catch (JSONException e) {
 			Log.v(LOG_TAG, e.getMessage());
-
-			// For testing
-			Toast.makeText(this, "Throws exception", Toast.LENGTH_SHORT).show();
 		}
 	}
 }

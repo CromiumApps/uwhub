@@ -8,6 +8,7 @@
 # Generated files #
 bin/
 gen/
+out/
 
 # Intellij project files #
 *.iml
@@ -25,6 +26,7 @@ gen/
 proguard-project.txt
 *.launch
 local.properties
+project.properties
 .cproject
 .buildpath
 .project

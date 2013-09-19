@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical" >
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:orientation="horizontal"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp" >
+
+        <TextView
+                android:id="@+id/tvLAYOUTWEATHERTypeID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Type #ID"
+                android:textSize="12sp" />
+
+        <TextView
+                android:id="@+id/tvLAYOUTWEATHERDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right|center_vertical"
+                android:text="Date"
+                android:textSize="12sp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:paddingBottom="10dp" >
+
+        <ImageView
+                android:id="@+id/tvLAYOUTWEATHERIcon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:gravity="left|center_vertical"/>
+
+        <TextView
+                android:id="@+id/tvLAYOUTWEATHERContent"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:text="Content"
+                android:gravity="right|center_vertical"
+                android:textSize="14sp" />
+    </LinearLayout>
+
+</LinearLayout>

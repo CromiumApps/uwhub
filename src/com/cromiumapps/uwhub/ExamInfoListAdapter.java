@@ -66,7 +66,8 @@ public class ExamInfoListAdapter extends BaseAdapter {
 		TextView tvLAYOUTExamInfoLocation = (TextView) v.findViewById(R.id.tvLAYOUTExamInfoLocation);
 		TextView tvLAYOUTExamInfoDate = (TextView) v.findViewById(R.id.tvLAYOUTExamInfoDate);
 	
-		tvLAYOUTExamInfoCode.setText(exams.getCourseID() + ", " + exams.getSection());
+		//tvLAYOUTExamInfoCode.setText(exams.getCourseID() + " (" + exams.getSection() + ")");
+		tvLAYOUTExamInfoCode.setText(exams.getCourseID());
 		tvLAYOUTExamInfoLocation.setText(exams.getLocation());
 		tvLAYOUTExamInfoDate.setText(exams.getDate());
 	

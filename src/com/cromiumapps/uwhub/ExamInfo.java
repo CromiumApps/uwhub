@@ -79,7 +79,7 @@ public class ExamInfo extends Activity implements UWAPIWrapperListener {
 			
 			for (int j = 0; j < jsonExamInfoResult.length(); j++) {
 				JSONObject examObject = jsonExamInfoResult.getJSONObject(j);
-				exams.add(j, new ExamInfoData(examObject.getString("Day"), examObject.getString("Section"), examObject.getString("Day"), examObject.getString("Date"), examObject.getString("Start"), examObject.getString("End"), examObject.getString("Location")));
+				exams.add(j, new ExamInfoData(examObject.getString("Course"), examObject.getString("Section"), examObject.getString("Day"), examObject.getString("Date"), examObject.getString("Start"), examObject.getString("End"), examObject.getString("Location")));
 			}
 			examInfoListadapter.notifyDataSetChanged();
 		} catch (JSONException e) {

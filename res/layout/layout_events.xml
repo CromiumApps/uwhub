@@ -27,11 +27,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="right|center_vertical"
+            android:gravity="right"
             android:text="Date"
             android:textSize="12sp" />
     </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:paddingBottom="10dp" >
 
+        <TextView
+            android:id="@+id/tvLAYOUTEVENTSWhere"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Where"
+            android:textSize="12sp" />
+    </LinearLayout>
+    
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

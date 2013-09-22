@@ -35,6 +35,7 @@ public class StringCleaner {
 		string = string.replaceAll("^, ","");
 		string = string.replace("\"\"","\"");
 		string = string.replace(" Details.","");
+		string = string.replace("&#x27;s","");
 
 		return string;
 	}

@@ -2,9 +2,11 @@ package com.cromiumapps.uwhub;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import android.content.Context;
+import android.util.Log;
 
 public class EventsData {
 
@@ -16,15 +18,20 @@ public class EventsData {
 	String name = null;
 	String links = null;
 	String description = null;
+	String where = null;
+	
+	int type = 0;
 	
 	SimpleDateFormat format = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z");
 	
-	public EventsData (String inputID, String inputDate, String inputName, String inputLinks, String inputDescription) {
+	public EventsData (String inputID, String inputDate, String inputName, String inputLinks, String inputDescription, String inputWhere, int inputType) {
 	    id = inputID;
 	    date = inputDate;
 	    name = inputName;
 	    links = inputLinks;
 	    description = inputDescription;
+	    where = inputWhere;
+	    type = inputType;
 	}
 	
 	public String getId() {
@@ -32,20 +39,22 @@ public class EventsData {
 	}
 	
 	public String getDate() {
-	    
-	    try 
-	    {
-	        Date parsedDate = (Date) format.parse(date);
-	        System.out.println(parsedDate);
-	        SimpleDateFormat day = new SimpleDateFormat("EEEE, MMMMM dd, yyyy");
-	        date = day.format(parsedDate).toString();
-	    } 
-	    catch (ParseException e) 
-	    {
-	        e.printStackTrace();
-	    }
-	    
 		return date;
+	}
+	
+	public String getLocation()
+	{
+		return this.where;
+	}
+	
+	public long getDateTimeInMilis()
+	{
+        SimpleDateFormat day = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar cal = day.getCalendar();
+        cal.set(Calendar.MONTH,cal.get(Calendar.MONTH)+1);
+        cal.set(Calendar.YEAR,cal.get(Calendar.YEAR)+80);
+        Log.d("CalendarQuery","returning calendar of day"+cal.get(Calendar.DATE)+","+cal.get(Calendar.MONTH)+","+cal.get(Calendar.YEAR));
+        return cal.getTimeInMillis();
 	}
 	
 	public String getName() {
@@ -59,4 +68,23 @@ public class EventsData {
 	public String getDescription() {
 		return StringCleaner.cleanContent(description);
 	}
+	
+	private String splitCalendarEventDate(String input)
+	{
+		input = input.split("-",5)[0];
+		input = input.substring(input.indexOf(','),input.length());
+		return input;
+	}
+	
+	/*private String parseInputDate(String inputDate,int inputType)
+	{
+		SimpleDateFormat day = new SimpleDateFormat("yyyy-MM-dd");
+		if(inputType == 0)day = new SimpleDateFormat("yyyy-MM-dd");;
+		if(inputType == 1)day = new SimpleDateFormat("dd MM yyyy");;
+		if(inputType == 2)day = new SimpleDateFormat("yyyy-MM-dd");;
+		
+        Calendar cal = day.getCalendar();
+        cal.set(Calendar.MONTH,cal.get(Calendar.MONTH)+1);
+        cal.set(Calendar.YEAR,cal.get(Calendar.YEAR)+80);
+	}*/
 }
